@@ -63,10 +63,11 @@ export default function ServicesSection() {
               {service.title}
             </h3>
             <p className="text-[#355587] mt-2">{service.desc}</p>
-
-            <button className="mt-4 text-[#355587] font-semibold flex items-center justify-center mx-auto">
-              LEARN MORE <span className="ml-1">↗</span>
-            </button>
+            <Link href="/service-page">
+              <button className="mt-4 text-[#355587] font-semibold flex items-center justify-center mx-auto">
+                LEARN MORE <span className="ml-1">→</span>
+              </button>
+            </Link>
           </motion.div>
         ))}
       </div>
