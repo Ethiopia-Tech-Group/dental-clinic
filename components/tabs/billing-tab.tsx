@@ -15,7 +15,7 @@ export function BillingTab() {
     patients,
     addBilling,
     updateBilling,
-    deleteBilling,
+    deleteBilling ,
   } = useAppStore();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -199,7 +199,7 @@ export function BillingTab() {
           data={billing}
           searchFields={["description"]}
           onEdit={handleOpenModal}
-          onDelete={deleteBilling}
+          onDelete={(item) => deleteBilling(item.id)}
         />
       </div>
 

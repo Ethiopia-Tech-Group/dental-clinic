@@ -30,6 +30,7 @@ export function DataTable<T extends { id: string }>({
   onView,
   searchFields = [],
   onRowClick,
+  
 }: DataTableProps<T>) {
   const [sortConfig, setSortConfig] = useState<{ key: keyof T | null; direction: "asc" | "desc"; }>({ key: null, direction: "asc" });
   const [searchTerm, setSearchTerm] = useState("");
