@@ -5,8 +5,8 @@ import { DataTable } from "@/components/shared/data-table";
 import { Modal } from "@/components/shared/modal";
 import { Badge } from "@/components/shared/badge";
 import { useAppStore } from "@/lib/store";
-import { Appointment, Branch, Dentist, Patient } from "@/types";
-import { Plus, Calendar, Clock, User, MapPin, FileText, X } from 'lucide-react';
+import { Appointment } from "@/types";
+import { Plus, Calendar, Clock, User, MapPin, FileText, X } from "lucide-react";
 
 export function AppointmentsTab() {
   const {
@@ -76,7 +76,7 @@ export function AppointmentsTab() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (
       !formData.patientId ||
       !formData.dentistId ||
@@ -90,11 +90,10 @@ export function AppointmentsTab() {
 
     if (editingId) {
       updateAppointment(editingId, formData);
-      // Update the selected appointment if it's the one being edited
       if (selectedAppointment?.id === editingId) {
         setSelectedAppointment({
           ...selectedAppointment,
-          ...formData
+          ...formData,
         } as Appointment);
       }
     } else {
@@ -114,29 +113,13 @@ export function AppointmentsTab() {
     handleCloseModal();
   };
 
-  const getPatientName = (id: string) => {
-    return patients.find((p) => p.id === id)?.name || "Unknown";
-  };
+  const getPatientName = (id: string) => patients.find((p) => p.id === id)?.name || "Unknown";
+  const getDentistName = (id: string) => dentists.find((d) => d.id === id)?.name || "Unknown";
+  const getBranchName = (id: string) => branches.find((b) => b.id === id)?.name || "Unknown";
 
-  const getDentistName = (id: string) => {
-    return dentists.find((d) => d.id === id)?.name || "Unknown";
-  };
-
-  const getBranchName = (id: string) => {
-    return branches.find((b) => b.id === id)?.name || "Unknown";
-  };
-
-  const getPatientDetails = (id: string) => {
-    return patients.find((p) => p.id === id);
-  };
-
-  const getDentistDetails = (id: string) => {
-    return dentists.find((d) => d.id === id);
-  };
-
-  const getBranchDetails = (id: string) => {
-    return branches.find((b) => b.id === id);
-  };
+  const getPatientDetails = (id: string) => patients.find((p) => p.id === id);
+  const getDentistDetails = (id: string) => dentists.find((d) => d.id === id);
+  const getBranchDetails = (id: string) => branches.find((b) => b.id === id);
 
   const columns = [
     { key: "appointmentDate" as const, label: "Date", sortable: true },
@@ -179,9 +162,9 @@ export function AppointmentsTab() {
   ];
 
   return (
-    <div className="flex h-full gap-6 ">
+    <div className="flex h-full gap-6 relative">
       {/* Main Content */}
-      <div className={` flex-1 space-y-6 relative${selectedAppointment ? 'lg:pr-80 pr-0' : ''}`}>
+      <div className={`flex-1 space-y-6 ${selectedAppointment ? 'lg:pr-96' : ''}`}>
         <div className="flex items-center justify-between">
           <div>
             <h2 className="text-2xl font-bold text-gray-900">Appointments</h2>
@@ -210,8 +193,8 @@ export function AppointmentsTab() {
 
       {/* Appointment Detail Sidebar */}
       {selectedAppointment && (
-        <div className="fixed inset-y-0 right-0 w-80 bg-white border-l border-gray-200 shadow-lg lg:static lg:shadow-none z-10">
-          <div className="h-full flex flex-col">
+        <div className="fixed top-0 right-0 h-full w-96 bg-white border-l border-gray-200 shadow-lg z-50 transform transition-transform duration-300">
+          <div className="flex flex-col h-full">
             {/* Header */}
             <div className="flex items-center justify-between p-6 border-b border-gray-200">
               <h3 className="text-lg font-semibold text-gray-900">Appointment Details</h3>
@@ -224,144 +207,135 @@ export function AppointmentsTab() {
             </div>
 
             {/* Content */}
-            <div className="flex-1 overflow-y-auto p-6">
-              <div className="space-y-6">
-                {/* Status Badge */}
-                <div className="flex justify-center">
-                  <Badge
-                    variant={
-                      selectedAppointment.status === "completed"
-                        ? "success"
-                        : selectedAppointment.status === "scheduled"
-                        ? "info"
-                        : "error"
-                    }
-                  >
-                    {selectedAppointment.status.toUpperCase()}
-                  </Badge>
-                </div>
-
-                {/* Date & Time */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-gray-50 rounded-lg p-4 text-center">
-                    <Calendar className="w-6 h-6 text-blue-600 mx-auto mb-2" />
-                    <p className="text-sm text-gray-600">Date</p>
-                    <p className="font-semibold text-gray-900">
-                      {new Date(selectedAppointment.appointmentDate).toLocaleDateString()}
-                    </p>
-                  </div>
-                  <div className="bg-gray-50 rounded-lg p-4 text-center">
-                    <Clock className="w-6 h-6 text-blue-600 mx-auto mb-2" />
-                    <p className="text-sm text-gray-600">Time</p>
-                    <p className="font-semibold text-gray-900">
-                      {selectedAppointment.appointmentTime}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Patient Information */}
-                <div className="space-y-4">
-                  <h4 className="font-semibold text-gray-900 flex items-center gap-2">
-                    <User className="w-4 h-4" />
-                    Patient Information
-                  </h4>
-                  <div className="bg-gray-50 rounded-lg p-4">
-                    {(() => {
-                      const patient = getPatientDetails(selectedAppointment.patientId);
-                      return patient ? (
-                        <div className="space-y-2">
-                          <p className="font-semibold text-gray-900">{patient.name}</p>
-                          <p className="text-sm text-gray-600">{patient.email}</p>
-                          <p className="text-sm text-gray-600">{patient.phone}</p>
-                        </div>
-                      ) : (
-                        <p className="text-gray-500">Patient not found</p>
-                      );
-                    })()}
-                  </div>
-                </div>
-
-                {/* Dentist Information */}
-                <div className="space-y-4">
-                  <h4 className="font-semibold text-gray-900 flex items-center gap-2">
-                    <User className="w-4 h-4" />
-                    Dentist Information
-                  </h4>
-                  <div className="bg-gray-50 rounded-lg p-4">
-                    {(() => {
-                      const dentist = getDentistDetails(selectedAppointment.dentistId);
-                      return dentist ? (
-                        <div className="space-y-2">
-                          <p className="font-semibold text-gray-900">{dentist.name}</p>
-                          <p className="text-sm text-gray-600">{dentist.specialization}</p>
-                          <p className="text-sm text-gray-600">{dentist.email}</p>
-                        </div>
-                      ) : (
-                        <p className="text-gray-500">Dentist not found</p>
-                      );
-                    })()}
-                  </div>
-                </div>
-
-                {/* Branch Information */}
-                <div className="space-y-4">
-                  <h4 className="font-semibold text-gray-900 flex items-center gap-2">
-                    <MapPin className="w-4 h-4" />
-                    Branch Information
-                  </h4>
-                  <div className="bg-gray-50 rounded-lg p-4">
-                    {(() => {
-                      const branch = getBranchDetails(selectedAppointment.branchId);
-                      return branch ? (
-                        <div className="space-y-2">
-                          <p className="font-semibold text-gray-900">{branch.name}</p>
-                          <p className="text-sm text-gray-600">{branch.address}</p>
-                          <p className="text-sm text-gray-600">{branch.phone}</p>
-                        </div>
-                      ) : (
-                        <p className="text-gray-500">Branch not found</p>
-                      );
-                    })()}
-                  </div>
-                </div>
-
-                {/* Notes */}
-                {selectedAppointment.notes && (
-                  <div className="space-y-4">
-                    <h4 className="font-semibold text-gray-900 flex items-center gap-2">
-                      <FileText className="w-4 h-4" />
-                      Notes
-                    </h4>
-                    <div className="bg-gray-50 rounded-lg p-4">
-                      <p className="text-sm text-gray-700 whitespace-pre-wrap">
-                        {selectedAppointment.notes}
-                      </p>
-                    </div>
-                  </div>
-                )}
+            <div className="flex-1 overflow-y-auto p-6 space-y-6">
+              <div className="flex justify-center">
+                <Badge
+                  variant={
+                    selectedAppointment.status === "completed"
+                      ? "success"
+                      : selectedAppointment.status === "scheduled"
+                      ? "info"
+                      : "error"
+                  }
+                >
+                  {selectedAppointment.status.toUpperCase()}
+                </Badge>
               </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-gray-50 rounded-lg p-4 text-center">
+                  <Calendar className="w-6 h-6 text-blue-600 mx-auto mb-2" />
+                  <p className="text-sm text-gray-600">Date</p>
+                  <p className="font-semibold text-gray-900">
+                    {new Date(selectedAppointment.appointmentDate).toLocaleDateString()}
+                  </p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 text-center">
+                  <Clock className="w-6 h-6 text-blue-600 mx-auto mb-2" />
+                  <p className="text-sm text-gray-600">Time</p>
+                  <p className="font-semibold text-gray-900">
+                    {selectedAppointment.appointmentTime}
+                  </p>
+                </div>
+              </div>
+
+              {/* Patient Info */}
+              <div className="space-y-2">
+                <h4 className="font-semibold text-gray-900 flex items-center gap-2">
+                  <User className="w-4 h-4" /> Patient Information
+                </h4>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  {(() => {
+                    const patient = getPatientDetails(selectedAppointment.patientId);
+                    return patient ? (
+                      <div className="space-y-1">
+                        <p className="font-semibold text-gray-900">{patient.name}</p>
+                        <p className="text-sm text-gray-600">{patient.email}</p>
+                        <p className="text-sm text-gray-600">{patient.phone}</p>
+                      </div>
+                    ) : (
+                      <p className="text-gray-500">Patient not found</p>
+                    );
+                  })()}
+                </div>
+              </div>
+
+              {/* Dentist Info */}
+              <div className="space-y-2">
+                <h4 className="font-semibold text-gray-900 flex items-center gap-2">
+                  <User className="w-4 h-4" /> Dentist Information
+                </h4>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  {(() => {
+                    const dentist = getDentistDetails(selectedAppointment.dentistId);
+                    return dentist ? (
+                      <div className="space-y-1">
+                        <p className="font-semibold text-gray-900">{dentist.name}</p>
+                        <p className="text-sm text-gray-600">{dentist.specialization}</p>
+                        <p className="text-sm text-gray-600">{dentist.email}</p>
+                      </div>
+                    ) : (
+                      <p className="text-gray-500">Dentist not found</p>
+                    );
+                  })()}
+                </div>
+              </div>
+
+              {/* Branch Info */}
+              <div className="space-y-2">
+                <h4 className="font-semibold text-gray-900 flex items-center gap-2">
+                  <MapPin className="w-4 h-4" /> Branch Information
+                </h4>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  {(() => {
+                    const branch = getBranchDetails(selectedAppointment.branchId);
+                    return branch ? (
+                      <div className="space-y-1">
+                        <p className="font-semibold text-gray-900">{branch.name}</p>
+                        <p className="text-sm text-gray-600">{branch.address}</p>
+                        <p className="text-sm text-gray-600">{branch.phone}</p>
+                      </div>
+                    ) : (
+                      <p className="text-gray-500">Branch not found</p>
+                    );
+                  })()}
+                </div>
+              </div>
+
+              {/* Notes */}
+              {selectedAppointment.notes && (
+                <div className="space-y-2">
+                  <h4 className="font-semibold text-gray-900 flex items-center gap-2">
+                    <FileText className="w-4 h-4" /> Notes
+                  </h4>
+                  <div className="bg-gray-50 rounded-lg p-4">
+                    <p className="text-sm text-gray-700 whitespace-pre-wrap">{selectedAppointment.notes}</p>
+                  </div>
+                </div>
+              )}
             </div>
 
-            {/* Footer Actions */}
-            <div className="p-6 border-t border-gray-200">
-              <div className="flex gap-3">
-                <button
-                  onClick={() => handleOpenModal(selectedAppointment)}
-                  className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors"
-                >
-                  Edit Appointment
-                </button>
-                <button
-                  onClick={() => handleDelete(selectedAppointment)}
-                  className="px-4 py-2 border border-red-300 text-red-600 rounded-lg hover:bg-red-50 transition-colors"
-                >
-                  Delete
-                </button>
-              </div>
+            {/* Footer */}
+            <div className="p-6 border-t border-gray-200 flex gap-3">
+              <button
+                onClick={() => handleOpenModal(selectedAppointment)}
+                className="flex-1 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Edit Appointment
+              </button>
+              <button
+                onClick={() => handleDelete(selectedAppointment)}
+                className="px-4 py-2 border border-red-300 text-red-600 rounded-lg hover:bg-red-50 transition-colors"
+              >
+                Delete
+              </button>
             </div>
           </div>
         </div>
       )}
+
+     
+
 
       {/* Create/Edit Modal */}
       <Modal isOpen={isModalOpen} onClose={handleCloseModal} title="Appointment Form" size="lg">

@@ -14,7 +14,7 @@ const navItems = [
   // { id: "patients", label: "Patients", icon: Users },
   { id: "dentists", label: "Dentists/Staff", icon: Stethoscope },
   { id: "branches", label: "Branches", icon: MapPin },
-  { id: "billing", label: "Billing", icon: CreditCard },
+  // { id: "billing", label: "Billing", icon: CreditCard },
   { id: "settings", label: "Settings", icon: Settings },
 ];
 
