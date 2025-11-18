@@ -119,7 +119,7 @@ export function DentistsTab() {
           data={dentists}
           searchFields={["name", "email", "specialization"]}
           onEdit={handleOpenModal}
-          onDelete={deleteDentist}
+          onDelete={(item) => deleteDentist(item.id)}
         />
       </div>
 

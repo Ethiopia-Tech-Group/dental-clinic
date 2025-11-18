@@ -107,7 +107,7 @@ export function PatientsTab() {
           data={patients}
           searchFields={["name", "email", "phone"]}
           onEdit={handleOpenModal}
-          onDelete={deletePatient}
+          onDelete={(item) => deletePatient(item.id)}
         />
       </div>
 

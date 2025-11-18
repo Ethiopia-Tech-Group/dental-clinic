@@ -152,7 +152,7 @@ export function SettingsTab() {
                     ) : (
                       <input
                         type={field.type}
-                        value={settings[field.key as keyof typeof settings]}
+                        value={String(settings[field.key as keyof typeof settings] ?? "")}
                         onChange={(e) =>
                           handleChange(field.key, e.target.value)
                         }

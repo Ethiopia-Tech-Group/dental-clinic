@@ -102,7 +102,7 @@ export function BranchesTab() {
           data={branches}
           searchFields={["name", "city", "phone"]}
           onEdit={handleOpenModal}
-          onDelete={deleteBranch}
+          onDelete={(item) => deleteBranch(item.id)}
         />
       </div>
 
