@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function ServiceHeroSection() {
   return (
-    <section className="flex flex-col md:flex-row items-center justify-between px-24 py-16 ">
+    <section className="flex flex-col md:flex-row items-center justify-between px-24  ">
       {/* Left Section */}
       <motion.div
         className="md:w-2/5 lg:w-1/2 space-y-6 px-12 md:pr-16"

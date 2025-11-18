@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function ContactMapSection() {
   return (
-    <section className="w-full bg-white py-29 px-6">
+    <section className="w-full bg-white py-12 px-6">
       <div className="max-w-7xl mx-auto">
         {/* Title */}
         <motion.h2

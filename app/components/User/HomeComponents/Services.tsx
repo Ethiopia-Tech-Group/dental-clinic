@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const services = [
   {
@@ -78,9 +79,11 @@ export default function ServicesSection() {
         transition={{ duration: 0.6, delay: 0.8 }}
         viewport={{ once: true }}
       >
-        <button className="px-6 py-3 bg-[#24417C]   text-white font-semibold rounded-full hover:bg-[#24417A]  ">
-          VIEW ALL
-        </button>
+        <Link href="/service-page">
+          <button className="px-6 py-3 bg-[#24417C]   text-white font-semibold rounded-full hover:bg-[#24417A]  ">
+            VIEW ALL
+          </button>
+        </Link>
       </motion.div>
     </section>
   );
