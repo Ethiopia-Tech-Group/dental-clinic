@@ -76,15 +76,15 @@ export default function HeroSection() {
         transition={{ duration: 0.95, ease: "easeOut" }}
       >
         <Image
-          src="/img/10005.jpg"
+          src="/img/2df612c4e1992f701036f697b7bf16e2.jpg"
           width={400}
           height={500}
           className="rounded w-72 sm:w-80 md:w-96 lg:w-120"
           alt="Dr. Munira Ejab"
         />
-        <h3 className="text-blue-900 text-lg sm:text-xl md:text-2xl font-bold mt-4 text-center lg:text-left">
+        {/* <h3 className="text-blue-900 text-lg sm:text-xl md:text-2xl font-bold mt-4 text-center lg:text-left">
           Dr. Munira Ejab
-        </h3>
+        </h3> */}
       </motion.div>
     </section>
   );
