@@ -116,13 +116,13 @@ export default function AdminDashboard() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <button
             className="bg-[#1A3A79] hover:bg-[#162f65] text-white font-medium py-3 px-4 rounded-lg transition"
-            onClick={() => router.push("/route/admin/employees/add")}
+            onClick={() => router.push("/route/admin/employee/add")}
           >
             Add New Employee
           </button>
           <button
             className="bg-white hover:bg-gray-50 text-gray-700 font-medium py-3 px-4 rounded-lg border border-gray-300 transition"
-            onClick={() => router.push("/route/admin/patients/add")}
+            onClick={() => router.push("/route/admin/patient/add")}
           >
             Add New Patient
           </button>
