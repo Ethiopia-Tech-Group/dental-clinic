@@ -59,20 +59,32 @@ export default function Header() {
           </h2>
 
           {/* Desktop Navigation (only lg and above) */}
-          <nav className="hidden lg:flex space-x-4 lg:space-x-10 text-[#1A3A79] font-medium text-sm sm:text-base">
+          <nav className="hidden lg:flex space-x-4 lg:space-x-6 text-[#1A3A79] font-medium text-sm sm:text-base items-center">
             <Link href="/">Home</Link>
             <Link href="/about">About Us</Link>
             <Link href="/service-page">Services</Link>
             <Link href="/contact-us">Contact</Link>
+            {/* Book Appointment */}
+            <Link
+              href="/booking"
+              className="px-4 py-1.5 bg-[#EDF3FA] text-[#1A3A79] font-semibold rounded-full hover:bg-[#1A3A79] hover:text-white transition duration-300 shadow-sm text-sm sm:text-base"
+            >
+              Book Appointment
+            </Link>
+            {/* Login/Register */}
+            <Link
+              href="/auth/login"
+              className="px-4 py-1.5 bg-white border border-[#1A3A79] text-[#1A3A79] font-semibold rounded-full hover:bg-[#1A3A79] hover:text-white transition duration-300 shadow-sm text-sm sm:text-base"
+            >
+              Login
+            </Link>
+            <Link
+              href="/auth/register"
+              className="px-4 py-1.5 bg-[#1A3A79] text-white font-semibold rounded-full hover:bg-white hover:text-[#1A3A79] border border-[#1A3A79] transition duration-300 shadow-sm text-sm sm:text-base"
+            >
+              Register
+            </Link>
           </nav>
-
-          {/* Book Appointment Button (only lg and above) */}
-          <Link
-            href="/booking"
-            className="hidden lg:inline-block px-4 sm:px-6 lg:px-8 py-1.5 sm:py-2 lg:py-3 bg-[#EDF3FA] text-[#1A3A79] font-semibold rounded-full hover:bg-[#1A3A79] hover:text-white transition duration-300 shadow-sm text-sm sm:text-base"
-          >
-            BOOK APPOINTMENT
-          </Link>
 
           {/* Mobile & Tablet Hamburger (below lg) */}
           <button
@@ -103,7 +115,22 @@ export default function Header() {
               onClick={() => setIsMenuOpen(false)}
               className="mt-2 px-6 py-2 bg-[#EDF3FA] text-[#1A3A79] font-semibold rounded-full hover:bg-[#1A3A79] hover:text-white transition duration-300 shadow-sm text-center"
             >
-              BOOK APPOINTMENT
+              Book Appointment
+            </Link>
+            {/* Login/Register */}
+            <Link
+              href="/auth/login"
+              onClick={() => setIsMenuOpen(false)}
+              className="px-6 py-2 bg-white border border-[#1A3A79] text-[#1A3A79] font-semibold rounded-full hover:bg-[#1A3A79] hover:text-white transition duration-300 text-center"
+            >
+              Login
+            </Link>
+            <Link
+              href="/auth/register"
+              onClick={() => setIsMenuOpen(false)}
+              className="px-6 py-2 bg-[#1A3A79] text-white font-semibold rounded-full hover:bg-white hover:text-[#1A3A79] border border-[#1A3A79] transition duration-300 text-center"
+            >
+              Register
             </Link>
           </div>
         )}
