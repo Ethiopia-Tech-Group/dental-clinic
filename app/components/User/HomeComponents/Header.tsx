@@ -55,7 +55,7 @@ export default function Header() {
         <div className="flex justify-between items-center px-3 sm:px-6 lg:px-10 py-2 sm:py-3">
           {/* Logo */}
           <h2 className="text-sm sm:text-lg lg:text-2xl font-extrabold text-[#1A3A79]">
-            Dr. Munira Speciality Dental Clinic
+            Speciality Dental Clinic
           </h2>
 
           {/* Desktop Navigation (only lg and above) */}
