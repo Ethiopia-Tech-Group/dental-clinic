@@ -33,7 +33,7 @@ export default function ServiceHeroSection() {
         transition={{ duration: 0.95, ease: "easeOut" }}
       >
         <Image
-          src="/img/10005.jpg"
+          src="/img/2df612c4e1992f701036f697b7bf16e2.jpg"
           width={400}
           height={400}
           className="rounded w-72 sm:w-80 md:w-96 "

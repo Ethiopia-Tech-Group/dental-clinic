@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import myImage from "../../../public/img/10005.jpg";
+import myImage from "../../../public/img/2df612c4e1992f701036f697b7bf16e2.jpg";
 import Link from "next/link";
 
 export default function Login() {
@@ -42,12 +42,7 @@ export default function Login() {
     <div className="min-h-screen flex flex-col md:flex-row">
       {/* Left Image */}
       <div className="hidden md:block md:w-1/2 relative">
-        <Image
-          src={myImage}
-          alt="Login Image"
-          className="object-cover w-full h-full"
-          fill
-        />
+        <Image src={myImage} alt="Login Image" className="w-full h-55" fill />
       </div>
 
       {/* Form Section */}

@@ -19,6 +19,8 @@ export default function ConditionalWrapper({
     "/contact-us",
     "/booking",
     "/service-page",
+    "/auth/login",
+    "/auth/register",
   ];
 
   const showHeaderFooter = routesWithHeaderFooter.includes(pathname);

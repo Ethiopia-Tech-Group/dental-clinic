@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import myImage from "../../../public/img/10005.jpg";
+import myImage from "../../../public/img/2df612c4e1992f701036f697b7bf16e2.jpg";
 
 export default function RegistrationPage() {
   return (
@@ -11,7 +11,7 @@ export default function RegistrationPage() {
         <Image
           src={myImage}
           alt="Registration Image"
-          className="object-cover w-full h-full"
+          className="w-full h-45"
           fill
         />
       </div>
